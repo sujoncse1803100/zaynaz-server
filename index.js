@@ -5,13 +5,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 const authRoute = require("./routes/auth");
-const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
-const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
-const checkOutRoute = require("./routes/stripe");
+const promocodeRoute = require("./routes/promocode");
 
-const MongoDB_URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.ifk56.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const MongoDB_URI = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.ohtj23d.mongodb.net/`;
 
 mongoose.connect(
   MongoDB_URI,
@@ -27,17 +25,16 @@ app.get("/", (req, res) => {
 
 app.use(cors());
 app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/product", productRoute);
-app.use("/api/cart", cartRoute);
+app.use("/api/promocode", promocodeRoute);
 app.use("/api/order", orderRoute);
-app.use("/api/checkout", checkOutRoute);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log("server is running at http://localhost:" + port);
+  console.log("backend server is running at http://localhost:" + port);
 });
