@@ -3,7 +3,7 @@
     "name": "zaynaz-group-task",
     "builds": [
       {
-        "src": "function/api.js", 
+        "src": "./function/api.js", 
         "use": "@vercel/node"
       }
     ],
