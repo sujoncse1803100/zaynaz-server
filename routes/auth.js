@@ -37,11 +37,11 @@ router.post("/login", async (req, res) => {
 
       const { password, ...others } = user._doc;
       Originalpassword === req.body.password
-        ? res.status(201).json({ ...others })
-        : res.status(401).send("Wrong Password");
+        ? res.json(201, { ...others })
+        : res.json(401, "Wrong Password");
     }
   } catch (err) {
-    res.status(500).json("Failed to authenticate user. Error is : ", err);
+    res.json(500, "Failed to authenticate user. Error is : " + err);
   }
 });
 
